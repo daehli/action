@@ -33,15 +33,6 @@ jobs:
           echo ::set-output name=tags::"${TAGS[*]}"
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       # Create an array of version to push to the Dockerhub registery
-      - name: Docker build and push
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          path: packages/bp/binariess
-          tags: ${{ steps.prep.outputs.version }}
-          add_git_labels: true
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
@@ -52,3 +43,12 @@ jobs:
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
             org.opencontainers.image.created=${{ steps.prep.outputs.created }}
             org.opencontainers.image.revision=${{ github.sha }}
+      - name: Docker build and push
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          path: packages/bp/binariess
+          tags: ${{ steps.prep.outputs.version }}
+          add_git_labels: true
