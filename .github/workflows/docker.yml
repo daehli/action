@@ -39,5 +39,5 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          tags: ${{ steps.prep.outputs.version }}
+          tags: ${{ steps.prep.outputs.tags }}
           add_git_labels: true
