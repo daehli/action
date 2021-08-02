@@ -23,7 +23,7 @@ jobs:
             VERSION+=($(echo ${GITHUB_REF#refs/heads/} | sed -r 's#/+#-#g')) # transform feature/00-feature-branch to feature-00-feature-branch
             VERSION+=('not-to-use')
           fi
-          if [[ $GITHUB_REG == "refs/heads/${{secrets.PRINCIPAL_BRANCH}} " ]]; then
+          if [[ $GITHUB_REG == "refs/heads/${{secrets.PRINCIPAL_BRANCH}}" ]]; then
             ## Check if code is pushed on the PRINCIPAL_BRANCH. PRINCIPAL_BRANCH is set as a SECRET
             VERSION+=(${{secrets.PRINCIPAL_BRANCH}})
           fi
@@ -38,5 +38,5 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          tags: ${{ steps.prep.outputs.version }}
+          tags: ${{ steps.prep.outputs.tags }}
           add_git_labels: true
