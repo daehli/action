@@ -32,11 +32,12 @@ jobs:
           echo ::set-output name=version::${VERSION[*]}
           echo ::set-output name=tags::"${TAGS[*]}"
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          echo "${VERSION[*]}"
       - name: Docker build and push
         uses: docker/build-push-action@v1
         with:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          tags: ${{ steps.prep.outputs.tags }}
+          tags: ${{ steps.prep.outputs.version }}
           add_git_labels: true
