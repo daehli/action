@@ -25,7 +25,7 @@ jobs:
           fi
           if [[ $GITHUB_REG == "refs/heads/${{secrets.PRINCIPAL_BRANCH}}" ]]; then
             ## Check if code is pushed on the PRINCIPAL_BRANCH. PRINCIPAL_BRANCH is set as a SECRET
-            VERSION+=(${{secrets. }})
+            VERSION+=(${{secrets.PRINCIPAL_BRANCH}})
           fi
           TAGS=("${VERSION[@]/#/${DOCKER_IMAGE}:}")
           IFS=,
