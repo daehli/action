@@ -33,12 +33,18 @@ jobs:
           echo ::set-output name=tags::"${TAGS[*]}"
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           echo "${VERSION[*]}"
+      - name: DockerHub Authentication
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Docker build and push
         uses: docker/build-push-action@v2
         if: contains('refs/heads/main', github.ref)
         with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
+          push: true
           tags: ${{ steps.prep.outputs.tags }}
-          add_git_labels: true
+          labels: |
+            org.opencontainers.image.source=${{ github.event.repository.html_url }}
+            org.opencontainers.image.created=${{ steps.prep.outputs.created }}
+            org.opencontainers.image.revision=${{ github.sha }}
