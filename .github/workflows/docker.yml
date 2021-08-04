@@ -24,7 +24,8 @@ jobs:
             VERSION+=($(echo ${GITHUB_REF#refs/heads/} | sed -r 's#/+#-#g')) # transform feature/00-feature-branch to feature-00-feature-branch
             VERSION+=('not-to-use')
           fi
-          if [[ $GITHUB_REG == "refs/heads/main" ]]; then
+          if [[ $GITHUB_REG == refs/heads/main ]]; then
+            echo "HELLOOO!"
             ## Check if code is pushed on the PRINCIPAL_BRANCH. PRINCIPAL_BRANCH is set as a SECRET
             VERSION+=(${{secrets.PRINCIPAL_BRANCH}})
             TAGS+=("${VERSION[@]/#/${DOCKER_IMAGE}:}")
