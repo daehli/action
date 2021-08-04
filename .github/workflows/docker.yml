@@ -22,7 +22,7 @@ jobs:
             VERSION+=($(echo ${TAG} | sed -r 's/\./_/g')) # Transform v12.13.0 to v12_13_0 ## Added backward compatibility
           elif [[ $GITHUB_REF == refs/heads/* ]]; then
             VERSION+=($(echo ${GITHUB_REF#refs/heads/} | sed -r 's#/+#-#g')) # transform feature/00-feature-branch to feature-00-feature-branch
-            VERSION+=('not-to-use')
+            VERSION+=('Ok-it-works')
           fi
           if [[ $GITHUB_REF == "refs/heads/${{secrets.PRINCIPAL_BRANCH}}"  ]]; then
             ## Check if code is pushed on the PRINCIPAL_BRANCH. PRINCIPAL_BRANCH is set as a SECRET
