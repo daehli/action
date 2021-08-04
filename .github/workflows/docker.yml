@@ -27,7 +27,7 @@ jobs:
             ## Check if code is pushed on the PRINCIPAL_BRANCH. PRINCIPAL_BRANCH is set as a SECRET
             VERSION+=(${{secrets.PRINCIPAL_BRANCH}})
           fi
-          GITHUB_REGISTRY="ghcr.io/botpress/${DOCKER_IMAGE}"
+          GITHUB_REGISTRY="ghcr.io/daehli1/${DOCKER_IMAGE}"
           TAGS=("${VERSION[@]/#/${GITHUB_REGISTRY}")
           IFS=,
           echo ::set-output name=version::${VERSION[*]}
