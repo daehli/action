@@ -20,9 +20,3 @@ jobs:
 
           echo "${BRANCH_NAME}"
           echo "${BRANCH_LABEL}"
-          # HEADER_CRUMB=echo $(curl ${{secret.BUILD_CRUMB}} -u '${{secret.BUILD_USERNAME}}:${{secret.BUILD_TOKEN}}' | jq  -r '[.crumbRequestField,.crumb | tostring] | join(": ")')
-          # curl ${{secrets.BUILD_URL}}?delay=0sec \
-          # -u '${{secret.BUILD_USERNAME}}:${{secret.BUILD_TOKEN}}'
-          # -H 'Content-Type: application/x-www-form-urlencoded' \
-          # -H "${HEADER_CRUMB}"
-          # -d "name=separator-37500b00-1f20-4f64-94ec-7afd045bec6f&name=DEPLOY_TO_S3&value=on&name=DEPLOY_TO_DOCKERHUB&value=off&name=DEPLOY_DOCUMENTATION&value=on&name=CLEAN_BEFORE_BUILD&value=on&name=BUILD_TYPE&value=release&name=BUILD_LABEL&value=${BRANCH_LABEL}&name=separator-5be33bf7-d9f5-486d-af56-d3458fbf99de&name=BRANCH&value=${BRANCH_NAME}&quickFilter=&statusCode=303&Submit=Build"
