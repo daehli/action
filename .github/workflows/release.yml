@@ -11,10 +11,10 @@ jobs:
       - name: Deploy via Jenkins
         id: Deploy
         run: |
-          BASE_REF=${{github.base_ref}}
+          HEAD_REF=${{github.head_ref}}
           sudo apt-get update && sudo apt-get install jq
-          BRANCH_LABEL=($(echo ${BASE_REF#release/})) # transform release/v12_12_12 to v12_12_12
-          BRANCH_NAME=($(echo "${BASE_REF}/#/origin\/"))
-
+          echo ${GITHUB_REF#refs/heads/}
+          BRANCH_LABEL=(echo $(${HEAD_REF}#release/)) # transform release/v12_12_12 to v12_12_12
+          BRANCH_NAME=("${HEAD_REF/#/origin\/}")
           echo "${BRANCH_NAME}"
           echo "${BRANCH_LABEL}"
