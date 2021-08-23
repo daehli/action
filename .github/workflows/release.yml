@@ -7,8 +7,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@master
-        with:
-          token: ${{ secrets.PAT_DOCKER }}
       # Create an array of version to push to the Dockerhub registery
       - name: Deploy via Jenkins
         id: Deploy
