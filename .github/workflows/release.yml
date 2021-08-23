@@ -11,7 +11,7 @@ jobs:
       - name: Deploy via Jenkins
         id: Deploy
         run: |
-          apt-get update && apt-get jq
+          sudo apt-get update && apt-get jq
           BRANCH_LABEL=($(echo ${GITHUB_REF#refs/heads/release})) # transform release/v12_12_12 to v12_12_12
           BRANCH_NAME=($(echo "${GITHUB_REF#refs/heads}/#/origin\/"))
 
