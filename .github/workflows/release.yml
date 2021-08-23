@@ -13,7 +13,6 @@ jobs:
         run: |
           HEAD_REF=${{github.head_ref}}
           sudo apt-get update && sudo apt-get install jq
-          echo ${GITHUB_REF#refs/heads/}
           BRANCH_LABEL=(echo $(${HEAD_REF}#release/)) # transform release/v12_12_12 to v12_12_12
           BRANCH_NAME=("${HEAD_REF/#/origin\/}")
           echo "${BRANCH_NAME}"
