@@ -3,6 +3,7 @@ on:
   pull_request_target:
     branches:
       - 'release\/v[0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3}'
+      - 'main'
     types: ['*']
 jobs:
   release:
@@ -16,9 +17,13 @@ jobs:
       - name: Deploy via Jenkins
         id: Deploy
         run: |
+          VALID_RELEASE="release\/v[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"  ## Will match Tags in the following format v123.231.123 or v1.2.3 will discard the following format v1.2.4-<revision>
           HEAD_REF=${{github.head_ref}}
           sudo apt-get update && sudo apt-get install jq
           BRANCH_LABEL=$(echo "${HEAD_REF#release\/}") # transform release/v12_12_12 to v12_12_12
           BRANCH_NAME=("${HEAD_REF/#/origin/}")
-          echo "${BRANCH_NAME}"
-          echo "${BRANCH_LABEL}"
+          echo "${VALID_RELEASE}"
+          if [[ VALID_RELEASE ~= BRANCH_NAME ]];
+            echo "${BRANCH_NAME}"
+            echo "${BRANCH_LABEL}"
+          fi
