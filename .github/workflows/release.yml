@@ -22,7 +22,7 @@ jobs:
           BRANCH_LABEL=$(echo "${HEAD_REF#release\/}") # transform release/v12_12_12 to v12_12_12
           BRANCH_NAME=("${HEAD_REF/#/origin/}")
           echo "${VALID_RELEASE}"
-          if [[ VALID_RELEASE =~ BRANCH_NAME ]];
+          if [[ VALID_RELEASE =~ BRANCH_NAME ]]; then
             echo "${BRANCH_NAME}"
             echo "${BRANCH_LABEL}"
           fi
